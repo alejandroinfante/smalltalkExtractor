@@ -53,7 +53,7 @@ ALONExtractor >> initialize [
 
 { #category : #'as yet unclassified' }
 ALONExtractor >> nameBagForMethod: cnMethod [
-	^ (C2VNameSplitter split: cnMethod methodName) asSet sortedAs: [ :w1 :w2 | w1 < w2 ]
+	^ (C2VNameSplitter split: cnMethod methodName) asSortedCollection: [ :w1 :w2 | w1 < w2 ]
 ]
 
 { #category : #building }
