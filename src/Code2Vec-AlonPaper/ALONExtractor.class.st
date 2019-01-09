@@ -36,9 +36,24 @@ ALONExtractor class >> extractFromFile: aFileName [
 ]
 
 { #category : #'as yet unclassified' }
+ALONExtractor class >> extractPaths: cnMethod [
+	^ (self new
+		extractPaths: cnMethod;
+		stream) contents
+]
+
+{ #category : #'as yet unclassified' }
 ALONExtractor >> extract: cnMethod [
 	self printNameBag: (self nameBagForMethod: cnMethod).
 	stream << ' '.
+	(self pathContextsForMethod: cnMethod) 
+		do: [ :context | self printContext: context ]
+		separatedBy: [ stream << ' ' ].
+	stream cr
+]
+
+{ #category : #'as yet unclassified' }
+ALONExtractor >> extractPaths: cnMethod [
 	(self pathContextsForMethod: cnMethod) 
 		do: [ :context | self printContext: context ]
 		separatedBy: [ stream << ' ' ].
