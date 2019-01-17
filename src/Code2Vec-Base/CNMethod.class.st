@@ -9,8 +9,21 @@ Class {
 		'pkgName',
 		'datasetFlag'
 	],
+	#classVars : [
+		'CurrentDataset'
+	],
 	#category : #'Code2Vec-Base'
 }
+
+{ #category : #'as yet unclassified' }
+CNMethod class >> currentDataset [
+	^ CurrentDataset ifNil: [ CurrentDataset := self materializeDataset: self defaultDatasetFile ]
+]
+
+{ #category : #'as yet unclassified' }
+CNMethod class >> defaultDatasetFile [
+	^ 'experiment_dataset.fl' asFileReference
+]
 
 { #category : #'initialize-release' }
 CNMethod class >> forMethod: compiledMethod [
@@ -20,6 +33,17 @@ CNMethod class >> forMethod: compiledMethod [
 		pkgName: compiledMethod package name;
 		sourceCode: compiledMethod sourceCode;
 		yourself.
+]
+
+{ #category : #'as yet unclassified' }
+CNMethod class >> materializeDataset: aDataset [
+	^ (FLMaterializer newDefault materializeFrom: aDataset binaryReadStream) root
+]
+
+{ #category : #'as yet unclassified' }
+CNMethod class >> serializeDataset: collectionOfCnMethods fromFile: fileRef [ 
+	fileRef binaryWriteStreamDo: [ :str |
+		FLSerializer serialize: collectionOfCnMethods on: str ]
 ]
 
 { #category : #'as yet unclassified' }
