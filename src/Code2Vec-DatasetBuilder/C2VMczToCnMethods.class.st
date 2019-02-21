@@ -94,15 +94,15 @@ C2VMczToCnMethods class >> splitAndTransformMcz: anMcz [
 
 { #category : #'instance creation' }
 C2VMczToCnMethods class >> testDirectory [
-	^ 'testFuel' asFileReference ensureCreateDirectory
+	^ ('Smalltalkhub' asFileReference / 'testFuel') ensureCreateDirectory
 ]
 
 { #category : #'instance creation' }
 C2VMczToCnMethods class >> trainDirectory [
-	^ 'trainFuel' asFileReference ensureCreateDirectory
+	^ ('Smalltalkhub' asFileReference / 'trainFuel') ensureCreateDirectory
 ]
 
 { #category : #'instance creation' }
 C2VMczToCnMethods class >> validationDirectory [
-	^ 'validationFuel' asFileReference ensureCreateDirectory
+	^ ('Smalltalkhub' asFileReference / 'validationFuel') ensureCreateDirectory
 ]
