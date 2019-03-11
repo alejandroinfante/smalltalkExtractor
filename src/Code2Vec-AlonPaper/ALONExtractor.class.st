@@ -30,9 +30,12 @@ ALONExtractor class >> extractFromDir: directory [
 
 { #category : #'as yet unclassified' }
 ALONExtractor class >> extractFromFile: aFileName [
-	(FLMaterializer materializeFromFileNamed: aFileName) 
+	[ (FLMaterializer materializeFromFileNamed: aFileName) 
 		doWithIndex: [ :cnMethod :index | 
-			FileStream stdout << (self extract: cnMethod) ].
+			[ Stdio stdout << (self extract: cnMethod) ]
+				on: Exception 
+				do: [ :e | Stdio stderr << ('Error on extracting ' , cnMethod asString); cr ] ] ] 
+	on: Exception do: [ :e | Stdio stderr << ('Error on materializing ' , aFileName); cr ]
 ]
 
 { #category : #'as yet unclassified' }
