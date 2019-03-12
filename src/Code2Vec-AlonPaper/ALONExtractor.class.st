@@ -48,10 +48,10 @@ ALONExtractor class >> extractPaths: cnMethod [
 { #category : #'as yet unclassified' }
 ALONExtractor >> extract: cnMethod [
 	self printNameBag: (self nameBagForMethod: cnMethod).
-	stream << ' '.
 	(self pathContextsForMethod: cnMethod) 
-		do: [ :context | self printContext: context ]
-		separatedBy: [ stream << ' ' ].
+		do: [ :context | 
+			stream << ' '.
+			self printContext: context ].
 	stream cr
 ]
 
@@ -118,6 +118,7 @@ ALONExtractor >> sanitizeCharacter: char [
 	char = Character lf ifTrue: [ ^ '\l' ].
 	char = Character nbsp ifTrue: [ ^ '\s' ].
 	char = Character tab ifTrue: [ ^ '\t' ].
+	(char asInteger > 127 or: [ char asInteger < 34 ]) ifTrue: [ ^ '\u' ].
 	^ char
 ]
 
