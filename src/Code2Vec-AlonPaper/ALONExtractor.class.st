@@ -52,7 +52,7 @@ ALONExtractor >> extract: cnMethod [
 		do: [ :context | 
 			stream << ' '.
 			self printContext: context ].
-	stream cr
+	stream lf
 ]
 
 { #category : #'as yet unclassified' }
